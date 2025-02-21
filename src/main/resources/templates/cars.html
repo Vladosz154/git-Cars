@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список автомобилей</title>
+    <!-- Подключаем Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Список автомобилей</h1>
+    <a href="/addCar" class="btn btn-primary mb-3">Добавить новый автомобиль</a>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Марка</th>
+            <th>Модель</th>
+            <th>Год выпуска</th>
+            <th>Цвет</th>
+            <th>Цена</th>
+            <th>Пробег</th>
+            <th>Владелец</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.year}"></td>
+            <td th:text="${car.color}"></td>
+            <td th:text="${car.price}"></td>
+            <td th:text="${car.mileage}"></td>
+            <td th:text="${car.author}"></td>
+            <td>
+                <a th:href="@{/view/{id}(id=${car.id})}" class="btn btn-info">Просмотреть</a>
+                <a th:href="@{/editCar/{id}(id=${car.id})}" class="btn btn-warning btn-sm">Редактировать</a>
+                <a th:href="@{/deleteCar/{id}(id=${car.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Вы уверены?')">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Добавляем ссылку на главную страницу с Bootstrap-стилем -->
+    <a href="/" class="btn btn-secondary mt-3">Главная страница</a>
+</div>
+
+<!-- Подключаем необходимые скрипты для Bootstrap (если нужно) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

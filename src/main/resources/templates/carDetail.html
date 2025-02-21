@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Детали автомобиля</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Детали автомобиля</h1>
+
+  <!-- Информация об автомобиле -->
+  <table class="table table-bordered">
+    <tr>
+      <th>Марка</th>
+      <td th:text="${car.brand}"></td>
+    </tr>
+    <tr>
+      <th>Модель</th>
+      <td th:text="${car.model}"></td>
+    </tr>
+    <tr>
+      <th>Год выпуска</th>
+      <td th:text="${car.year}"></td>
+    </tr>
+    <tr>
+      <th>Цвет</th>
+      <td th:text="${car.color}"></td>
+    </tr>
+    <tr>
+    <tr>
+      <th>Цена</th>
+      <td th:text="${car.price}"></td>
+    </tr>
+    <tr>
+    <tr>
+      <th>Пробег</th>
+      <td th:text="${car.mileage}"></td>
+    </tr>
+    <tr>
+      <th>Владелец</th>
+      <td th:text="${car.author}"></td>
+    </tr>
+  </table>
+  <h3>Фотографии:</h3>
+  <div class="row">
+    <div th:each="image : ${car.images}">
+      <img th:src="@{'/uploads/' + ${image.fileName}}" alt="Фото" style="width:auto; max-width:100%; height:auto;">
+    </div>
+
+  </div>
+
+  <a href="/cars" class="btn btn-secondary">Назад к списку</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

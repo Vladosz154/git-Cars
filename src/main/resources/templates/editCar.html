@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактировать автомобиль</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Редактировать автомобиль</h1>
+    <form th:action="@{/updateCar}" th:object="${car}" method="post">
+        <!-- Поля для редактирования автомобиля -->
+        <div class="form-group">
+            <label for="brand">Марка:</label>
+            <input type="text" th:field="*{brand}" id="brand" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label for="model">Модель:</label>
+            <input type="text" th:field="*{model}" id="model" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label for="year">Год выпуска:</label>
+            <input type="number" th:field="*{year}" id="year" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label for="color">Цвет:</label>
+            <input type="text" th:field="*{color}" id="color" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label for="price">Цена:</label>
+            <input type="number" th:field="*{price}" id="price" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label for="mileage">Пробег:</label>
+            <input type="number" th:field="*{mileage}" id="mileage" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label for="author">Владелец:</label>
+            <input type="text" th:field="*{author}" id="author" class="form-control" required/>
+        </div>
+        <button type="submit" class="btn btn-success">Сохранить изменения</button>
+    </form>
+
+    <!-- Добавление новой фотографии -->
+    <h3>Добавить новую фотографию</h3>
+    <form th:action="@{/addImage}" method="post" enctype="multipart/form-data" class="mb-4">
+        <input type="hidden" name="carId" th:value="${car.id}">
+        <div class="form-group">
+            <input type="file" name="newPhoto" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Добавить фотографию</button>
+    </form>
+
+    <!-- Секция редактирования существующих фотографий -->
+    <h3>Редактирование фотографий</h3>
+    <div class="row">
+        <div class="col-md-4" th:each="image : ${car.images}">
+            <img th:src="@{'/uploads/' + ${image.fileName}}" alt="Фото" style="width:100%; height:auto;">
+            <form th:action="@{'/deleteImage/' + ${image.id}}" method="post">
+                <input type="hidden" name="carId" th:value="${car.id}">
+                <button type="submit" class="btn btn-danger mt-2">Удалить</button>
+            </form>
+            <form th:action="@{/updateImage}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="imageId" th:value="${image.id}">
+                <input type="hidden" name="carId" th:value="${car.id}">
+                <input type="file" name="newPhoto" class="form-control mt-2">
+                <button type="submit" class="btn btn-primary mt-2">Обновить</button>
+            </form>
+        </div>
+    </div>
+
+    <a href="/cars" class="btn btn-secondary mt-4">Назад к списку автомобилей</a>
+</div>
+</body>
+</html>

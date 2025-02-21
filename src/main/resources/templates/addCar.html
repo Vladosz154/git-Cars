@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить автомобиль</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Добавить новый автомобиль</h1>
+    <form action="/addCar" th:object="${car}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="brand">Марка:</label>
+            <input type="text" th:field="*{brand}" id="brand" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="model">Модель:</label>
+            <input type="text" th:field="*{model}" id="model" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="year">Год выпуска:</label>
+            <input type="number" th:field="*{year}" id="year" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="color">Цвет:</label>
+            <input type="text" th:field="*{color}" id="color" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Цена:</label>
+            <input type="number" th:field="*{price}" id="price" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="mileage">Пробег:</label>
+            <input type="number" th:field="*{mileage}" id="mileage" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="author">Владелец:</label>
+            <input type="text" th:field="*{author}" id="author" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="photos">Фотографии:</label>
+            <input type="file" name="photos" id="photos" multiple class="form-control"/>
+        </div>
+
+        <button type="submit" class="btn btn-success">Добавить автомобиль</button>
+    </form>
+
+    <a href="/cars" class="btn btn-secondary mt-3">Вернуться к списку автомобилей</a>
+</div>
+</body>
+</html>
